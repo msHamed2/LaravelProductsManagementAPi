@@ -39,8 +39,8 @@
 </div>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
-{{--<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>--}}
-{{--<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging.js"></script>--}}
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js"></script>
 
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -67,41 +67,48 @@
 {{--    };--}}
 {{--    // Initialize Firebase--}}
 {{--   // const firebase= initializeApp(firebaseConfig);--}}
-<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+{{--<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>--}}
 
-<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js"></script>
+{{--<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js"></script>--}}
 
 {{--<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>--}}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     var firebaseConfig = {
-        apiKey: 'api-AIzaSyDaHN2Zphz7o0Y3iI_iwDELKuBLJJosww0',
-        authDomain: "fir-notificationstest-ae16b.firebaseapp.com",
-        projectId: "fir-notificationstest-ae16b",
-        storageBucket: "fir-notificationstest-ae16b.appspot.com",
-        messagingSenderId: "816212970982",
-        appId: "1:816212970982:web:45820e9997343221225a27",
-        measurementId: "G-N3FN8YZ33H"
+        apiKey: "AIzaSyAcN6Sq0bUj978W8nnftdDG6Ei64pUPr3Y",
+        authDomain: "testing-2bd06.firebaseapp.com",
+        projectId: "testing-2bd06",
+        storageBucket: "testing-2bd06.appspot.com",
+        messagingSenderId: "958134735322",
+        appId: "1:958134735322:web:45365ca1f8c6276573b0e3",
+        measurementId: "G-VJE6JKV58L"
+
     };
+
     firebase.initializeApp(firebaseConfig);
+
     const messaging = firebase.messaging();
     function startFCM() {
-        console.log('here');
+
 
         messaging
             .requestPermission()
             .then(function () {
+
                 return messaging.getToken()
             })
             .then(function (response) {
+                console.log(response);
                 $.ajaxSetup({
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+
                     }
                 });
                 $.ajax({
                     url: '{{ route("fcmToken") }}',
                     type: 'POST',
+
                     data: {
                         token: response
                     },
@@ -127,3 +134,5 @@
         new Notification(title, options);
     });
 </script>
+
+{{--<script src="{{asset('firebase-messaging-sw.js')}}" ></script>--}}

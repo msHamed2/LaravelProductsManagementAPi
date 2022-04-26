@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/auth/{provider}',[\App\Http\Controllers\AuthController::class,'faceBookRedirect']);
 Route::get('/auth/{provider}/callback',[\App\Http\Controllers\AuthController::class,'facebookLogin']);
 Route::get('home', [\App\Http\Controllers\FirebaseController::class, 'index'])->name('home');
-Route::patch('/fcm-token', [\App\Http\Controllers\FirebaseController::class, 'updateToken'])->name('fcmToken')->middleware('auth:sanctum');
+Route::post('/fcm-token', [\App\Http\Controllers\FirebaseController::class, 'updateToken'])->name('fcmToken')->middleware('auth:sanctum');
 Route::post('/send-notification',[\App\Http\Controllers\FirebaseController::class,'notification'])->name('notification');
 Route::get('/dashboard',function (){
     return view('dashboard');

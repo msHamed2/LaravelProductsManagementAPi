@@ -24,3 +24,6 @@ Route::controller(AuthController::class)->prefix('users')->group(function (){
     Route::get('/logout','logout')->middleware('auth:sanctum');
 });
 Route::resource('products', ProductsController::class);
+Route::post('/send-notification',[\App\Http\Controllers\FirebaseController::class,'notification'])->name('notification')->can('create');
+Route::post('/send-notification-to-one',[\App\Http\Controllers\FirebaseController::class,'oneNotification'])->can('create');
+Route::get('/get-notification',[\App\Http\Controllers\FirebaseController::class,'getNotification'])->middleware('auth:sanctum');
